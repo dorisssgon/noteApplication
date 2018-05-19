@@ -1,0 +1,49 @@
+/* you can use imports if you like */
+@import "foo.scss";
+
+i {
+  float: right;
+  margin: 2px;
+  height: 20px;
+  width: 20px;
+  z-index: 6;
+}
+
+.pch {
+    color:red;
+  .dan {
+    color:blue;
+  }
+  &:hover {
+    color:pink
+  }
+}
+
+.note {
+  position: absolute;
+}
+
+.header {
+  cursor: move;
+  opacity: 0;
+  z-index: 5;
+  &:hover{
+    opacity: 1;
+  }
+}
+.content {
+  font-family: Arial;
+  margin:10px;
+  &:focus {
+    outline:none;
+  }
+}
+
+.handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: move;
+  border-bottom :10px solid grey;
+  border-left: 10px solid transparent;
+}
