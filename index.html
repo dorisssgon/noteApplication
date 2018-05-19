@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="./dist/css/notes.css">
+    <script language="javascript" type="text/javascript" src="./dist/js/notes.js"></script>
+    <meta charset="utf-8" />
+    <title>notes</title>
+  </head>
+  <body onload="init()">
+    <div id="toolbar">
+      <button type="button" onclick="createNote()">+</button>
+    </div>
+    <div id="note-container"></div>
+    <script>
+      function init() {
+          var records = JSON.parse(localStorage.getItem('notes'))||[];
+        console.log(records)
+        records.forEach(record => createNote(record))
+        setInterval(getNotes, 1000)
+      }
+
+      function getNotes() {
+        var records = []
+        document.querySelectorAll('.note').forEach(note => {
+          var record = {}
+          record.color = note.style.backgroundColor;
+          record.top = parseInt(note.style.top);
+          record.left = parseInt(note.style.left);
+          record.height = parseInt(note.style.height);
+          record.width = parseInt(note.style.width);
+          record.text = note.children[1].innerHTML;
+          records.push(record)
+        })
+        localStorage.setItem('notes', JSON.stringify(records))
+      }
+
+      function createNote (record) {
+        var record = record || {};
+        var note = new Note(record.text, record.top, record.left, record.height, record.width, record.color);
+        note.render(document.getElementById('note-container'));
+        note.rerender()
+      }
+    </script>
+  </body>
+</html>
